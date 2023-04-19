@@ -1,8 +1,5 @@
-import os
-import sys
 import mysql.connector
 import configparser
-import logging
 
 
 def pull_avg(query):
@@ -50,6 +47,7 @@ def pull_avg_max(location, year):
     return pull_avg(max_query)
 
 
+# Samples to call the method
 print(pull_avg_min('USC00110072', '1985'))
 print(pull_avg_max('USC00110072', '1985'))
 
