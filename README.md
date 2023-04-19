@@ -22,6 +22,7 @@ A sample project for Corteva Coding Exercise
     * apis/weather: this will return all weather data if no parameter passed, with parameter, it will select data of certain location/year/page
     * apis/stats/min_avg: this will return average of min temperatures of certain year and location
     * apis/stats/max_avg: this will return average of max temperatures of certain year and location
+  * Test cases in test/test_api.py
 
 ### Deployment:
 * for API:
@@ -29,7 +30,7 @@ A sample project for Corteva Coding Exercise
     * (Required) Database: RDS (Relational Database Service) for MySQL db
     * (Required) Instance hosting: EC2 (Elastic Compute Cloud)
     * (Required) Secure the access of AWS: IAM (Identity and Access Management)
-    * (Required) Logging: we can use file storage service like S3 to store the logs
+    * (Recommended) Logging: we can use file storage service like S3 to store the logs or we can call CloudWatch 
     * (Optional) Route 53: to register and map DNS (maybe not needed if this is for internal usage)
     * (Optional) Load balancer: maybe not need if the traffic is low, we can use ELB (Elastic Load Balancer)
     * (Optional) traffic control: (if not internal only) we can use Virtual Private Cloud (VPC) to isolate resources and control inbound and outbound traffic

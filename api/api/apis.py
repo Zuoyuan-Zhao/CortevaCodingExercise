@@ -4,7 +4,7 @@ from .models import Weather
 from django.db.models import Avg
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework_swagger.renderers import OpenAPIRenderer, SwaggerUIRenderer
-
+import logging
 
 @api_view(['GET'])
 @renderer_classes([OpenAPIRenderer, SwaggerUIRenderer])
@@ -16,16 +16,18 @@ def get_weather_api(request):
                     ---
 
                     """
+
+    logger = set_logger()
     location = request.GET.get('location')
     year = request.GET.get('year')
+    page_number = request.GET.get('page')
+    logger.info('get_weather_api with params: %s , %s, %s', location, year, page_number)
     weather_list = Weather.objects.all()
     if location:
         weather_list = weather_list.filter(Location=location)
     if year:
         weather_list = weather_list.filter(DateStamp__year=year)
     weather_list = weather_list.order_by('DateStamp')
-    page_number = request.GET.get('page')
-
     paginator = Paginator(weather_list, 10)
 
     try:
@@ -63,9 +65,10 @@ def get_stats_min_avg(request):
                     ---
 
     """
+    logger = set_logger()
     location = request.GET.get('location')
     year = request.GET.get('year')
-
+    logger.info('get_stats_min_avg with params: %s , %s', location, year)
     if location and year:
         # Filter queryset based on location and year
         data = Weather.objects.filter(Location=location, DateStamp__year=year).aggregate(Avg('MinTemp'))
@@ -73,6 +76,7 @@ def get_stats_min_avg(request):
         response_data = {'Result (Average of Min Temperature)': avg_mintemp}
         return JsonResponse(response_data)
     else:
+        logger.error('invalid input: %s , %s', location, year)
         return HttpResponseBadRequest('Please provide both location and year parameters.')
 
 
@@ -85,9 +89,10 @@ def get_stats_max_avg(request):
                         ---
 
                         """
+    logger = set_logger()
     location = request.GET.get('location')
     year = request.GET.get('year')
-
+    logger.info('get_stats_min_avg with params: %s , %s', location, year)
     if location and year:
         # Filter queryset based on location and year
         data = Weather.objects.filter(Location=location, DateStamp__year=year).aggregate(Avg('MaxTemp'))
@@ -95,4 +100,12 @@ def get_stats_max_avg(request):
         response_data = {'Result (Average of Max Temperature)': avg_maxtemp}
         return JsonResponse(response_data)
     else:
+        logger.error('invalid input: %s , %s', location, year)
         return HttpResponseBadRequest('Please provide both location and year parameters.')
+
+
+def set_logger():
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger('API-Logger')
+
+    return logger
