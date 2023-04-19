@@ -18,7 +18,7 @@ A sample project for Corteva Coding Exercise
 * Answer location: api/
 * Description: created DJango REST API by following online tutorial that contains 
   * a swagger page that contains all endpoints "/docs"
-  * A few API endpoints in apis.py
+  * A few API endpoints in apis.py with some dummy logging
     * apis/weather: this will return all weather data if no parameter passed, with parameter, it will select data of certain location/year/page
     * apis/stats/min_avg: this will return average of min temperatures of certain year and location
     * apis/stats/max_avg: this will return average of max temperatures of certain year and location
