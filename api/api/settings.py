@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'corteva',
-        'USER': 'root',
-        'PASSWORD': 'RootPass1!',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': 'DBName',
+        'USER': 'Username',
+        'PASSWORD': 'password',
+        'HOST': 'host',
+        'PORT': '0000',
     }
 }
 
