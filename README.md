@@ -11,8 +11,10 @@ A sample project for Corteva Coding Exercise
 * Description: created a process that read through all the files in certain folder and parse and insert into MySQL DB table. It will log according to different levels as well
 
 ### Problem 3 - Data Analysis:
-* Answer location: data-analysis/stats.py
-* Description: created 2 method to execute queries in MySQL DB, which requires parameters from user and will output result directly
+* Answer location: data-analysis/stats.py + WeatherStat.sql
+* Description:
+  * created a MySQL table locally to contain all the data with a primary key combo of [Location, Year] to make sure uniqueness 
+  * created 1 method to execute stored procedure in MySQL DB to calculate stats and put the result into WeatherStats table
 
 ### Problem 4 - REST API:
 * Answer location: api/
@@ -20,9 +22,10 @@ A sample project for Corteva Coding Exercise
   * a swagger page that contains all endpoints "/docs"
   * A few API endpoints in apis.py with some dummy logging
     * apis/weather: this will return all weather data if no parameter passed, with parameter, it will select data of certain location/year/page
-    * apis/stats/min_avg: this will return average of min temperatures of certain year and location
-    * apis/stats/max_avg: this will return average of max temperatures of certain year and location
-  * Test cases in test/test_api.py
+      * Sample link: http://127.0.0.1:8000/apis/weather?location=USC00110072&year=1985&page=100
+    * apis/stats: this will return all weather stats data if no parameter passed, with parameter, it will select data of certain location/year
+      * Sample link: http://127.0.0.1:8000/apis/weather/stats?location=USC00110072&year=1985&page=100
+  * Integration Test cases in test/test_api.py
 
 ### Deployment:
 * for API:
