@@ -39,6 +39,6 @@ Assuming we use AWS for everything, then, we can manage AWS by terraform code an
    * (Optional) Load balancer: maybe not need if the traffic is low, we can use ELB (Elastic Load Balancer)
    * (Optional) traffic control: (if not internal only) we can use Virtual Private Cloud (VPC) to isolate resources and control inbound and outbound traffic
 * for data ingestion:
-  * Logic layer: since it's just 1 function, we can just use serverless architecture to handle it
+  * Logic layer: since it's just 1 function, we can just use Lambda which is serverless architecture to handle it
   * File storage: we can use S3 to store the input data files
   * Task Scheduling: we can use Amazon EventBridge Scheduler for task scheduling process (Tutorial: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-run-lambda-schedule.html)
