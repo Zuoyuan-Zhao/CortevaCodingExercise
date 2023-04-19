@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseBadRequest
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Weather
 from django.db.models import Avg
@@ -73,7 +73,7 @@ def get_stats_min_avg(request):
         response_data = {'Result (Average of Min Temperature)': avg_mintemp}
         return JsonResponse(response_data)
     else:
-        return JsonResponse({'error': 'Please provide both location and year parameters.'})
+        return HttpResponseBadRequest('Please provide both location and year parameters.')
 
 
 @api_view(['GET'])
@@ -95,4 +95,4 @@ def get_stats_max_avg(request):
         response_data = {'Result (Average of Max Temperature)': avg_maxtemp}
         return JsonResponse(response_data)
     else:
-        return JsonResponse({'error': 'Please provide both location and year parameters.'})
+        return HttpResponseBadRequest('Please provide both location and year parameters.')
