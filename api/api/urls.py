@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from .apis import get_weather_api, get_stats_min_avg, get_stats_max_avg
+from .apis import get_weather_api, get_weather_stats_api
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework import permissions
@@ -24,6 +24,5 @@ urlpatterns = [
     path('redoc/', generated_schema_view.with_ui('redoc', cache_timeout=0),
          name='schema-redoc'),  # <-- Here
     path('apis/weather', get_weather_api),
-    path('apis/stats/min_avg', get_stats_min_avg),
-    path('apis/stats/max_avg', get_stats_max_avg),
+    path('apis/weather/stats', get_weather_stats_api),
 ]
