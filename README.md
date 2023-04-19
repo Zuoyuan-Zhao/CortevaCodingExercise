@@ -29,6 +29,7 @@ A sample project for Corteva Coding Exercise
   * Integration Test cases in test/test_api.py
 
 ### Deployment:
+Assuming we use AWS for everything, then, we can manage AWS by terraform code and leverage below services
 * for API:
   * using below components:
     * (Required) Database: RDS (Relational Database Service) for MySQL db
