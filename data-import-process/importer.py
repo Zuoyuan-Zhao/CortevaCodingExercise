@@ -25,6 +25,7 @@ def import_weather_file(file_path, location):
     )
     cursor = db.cursor()
     failed_row_count = 0
+    processed_row_count = 0;
     # read file and insert data into the table
     with open(file_path, "r") as f:
         for line in f:
@@ -49,6 +50,7 @@ def import_weather_file(file_path, location):
                         '''
                 values = (location, date, max_temp, min_temp, precipitation)
                 cursor.execute(query, values)
+                processed_row_count = processed_row_count + 1
             except mysql.connector.IntegrityError as e:
                 logging.debug("Encountered issue when inserting row: " + e.msg)
                 failed_row_count = failed_row_count + 1
@@ -57,16 +59,19 @@ def import_weather_file(file_path, location):
     # commit changes and close database connection
     db.commit()
     db.close()
+    logging.info('Processed rows: ' + str(processed_row_count))
     if failed_row_count == 0:
         logging.info('Processed file: ' + file_path + ' with no failure')
     else:
         logging.info('Processed file: ' + file_path + ' with ' + str(failed_row_count) + ' failed rows')
+    return processed_row_count
 
 
 def process_files():
     config.read('config.ini')
     file_directory = config.get('ProcessorInfo', 'file_directory')
     failed_file_count = 0
+    total_processed_count = 0;
     # Loop through all files in the folder and process it one by one
     for filename in os.listdir(file_directory):
         file_path = os.path.join(file_directory, filename)
@@ -74,13 +79,15 @@ def process_files():
         if os.path.isfile(file_path):
             try:
                 logging.info('Processing file: ' + file_path)
-                import_weather_file(file_path, location)
+                count = import_weather_file(file_path, location)
+                total_processed_count = total_processed_count + count
             except:
                 e = sys.exc_info()[0]
                 logging.error('Failed to process file: ' + e)
                 failed_file_count = failed_file_count + 1
                 pass
     logging.info('Processed files with ' + str(failed_file_count) + ' failures')
+    logging.info('Total rows processed: ' + str(total_processed_count))
 
 
 # Setup logging
