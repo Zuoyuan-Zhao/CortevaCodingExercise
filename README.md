@@ -13,8 +13,9 @@ A sample project for Corteva Coding Exercise
 ### Problem 3 - Data Analysis:
 * Answer location: data-analysis/stats.py + WeatherStat.sql
 * Description:
-  * created a MySQL table locally to contain all the data with a primary key combo of [Location, Year] to make sure uniqueness 
-  * created 1 method to execute stored procedure in MySQL DB to calculate stats and put the result into WeatherStats table
+  * created a MySQL table locally to contain all the data with a primary key combo of [Location, Year] to make sure uniqueness (WeatherStat.sql)
+  * created a stored procedure to calculate stats and put the result into WeatherStats table (WeatherStat.sql)
+  * created a method to execute stored procedure (stats.py)
 
 ### Problem 4 - REST API:
 * Answer location: api/
