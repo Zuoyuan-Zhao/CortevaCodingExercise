@@ -5,6 +5,7 @@ import configparser
 import logging
 
 
+# Extract data from file and insert it into MySQL DB
 def import_weather_file(file_path, location):
     # Setup DB configs
     config.read('config.ini')

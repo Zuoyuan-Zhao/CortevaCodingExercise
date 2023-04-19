@@ -10,4 +10,4 @@ class Weather(models.Model):
 
     class Meta:
         db_table = 'Weather'
-        unique_together = (('Location', 'DateStamp'),)
+        unique_together = (('Location', 'DateStamp'))
