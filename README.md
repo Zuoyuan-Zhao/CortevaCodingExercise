@@ -31,14 +31,13 @@ A sample project for Corteva Coding Exercise
 ### Deployment:
 Assuming we use AWS for everything, then, we can manage AWS by terraform code and leverage below services
 * for API:
-  * using below components:
-    * (Required) Database: RDS (Relational Database Service) for MySQL db
-    * (Required) Instance hosting: EC2 (Elastic Compute Cloud)
-    * (Required) Secure the access of AWS: IAM (Identity and Access Management)
-    * (Recommended) Logging: we can use file storage service like S3 to store the logs or we can call CloudWatch 
-    * (Optional) Route 53: to register and map DNS (maybe not needed if this is for internal usage)
-    * (Optional) Load balancer: maybe not need if the traffic is low, we can use ELB (Elastic Load Balancer)
-    * (Optional) traffic control: (if not internal only) we can use Virtual Private Cloud (VPC) to isolate resources and control inbound and outbound traffic
+   * (Required) Database: RDS (Relational Database Service) for MySQL db
+   * (Required) Instance hosting: EC2 (Elastic Compute Cloud)
+   * (Required) Secure the access of AWS: IAM (Identity and Access Management)
+   * (Recommended) Logging: we can use file storage service like S3 to store the logs or we can call CloudWatch 
+   * (Optional) Route 53: to register and map DNS (maybe not needed if this is for internal usage)
+   * (Optional) Load balancer: maybe not need if the traffic is low, we can use ELB (Elastic Load Balancer)
+   * (Optional) traffic control: (if not internal only) we can use Virtual Private Cloud (VPC) to isolate resources and control inbound and outbound traffic
 * for data ingestion:
   * Logic layer: since it's just 1 function, we can just use serverless architecture to handle it
   * File storage: we can use S3 to store the input data files
