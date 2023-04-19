@@ -29,9 +29,9 @@ class APITest(TestCase):
     def test_stats_min_avg_api_with_param_then_ok(self):
         response = requests.get(self.min_avg_url, {'location': 'USC00110072', 'year': '1985'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertTrue(response.text.__contains__('-1.1918'))
+        self.assertTrue(response.text.__contains__('4.326446294127745'))
 
     def test_stats_max_avg_api_with_param_then_ok(self):
         response = requests.get(self.max_avg_url, {'location': 'USC00110072', 'year': '1985'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertTrue(response.text.__contains__('15.3205'))
+        self.assertTrue(response.text.__contains__('15.334794533416016'))

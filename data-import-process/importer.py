@@ -30,13 +30,22 @@ def import_weather_file(file_path, location):
             # extract data from line
             data = line.split()
             date = data[0]
-            max_temp = float(data[1]) / 10.0
-            min_temp = float(data[2]) / 10.0
-            precipitation = float(data[3]) / 10.0
+
+            max_temp = float(data[1]) / 10.0 if float(data[1]) > -9999 else None
+            min_temp = float(data[2]) / 10.0 if float(data[2]) > -9999 else None
+            precipitation = float(data[3]) / 10.0 if float(data[3]) > -9999 else None
             try:
                 # insert data into MySQL table
-                query = "INSERT INTO Weather (location, DateStamp, MaxTemp, MinTemp, precipitation) VALUES (%s, %s, " \
-                        "%s, %s, %s)"
+                query = '''
+                        INSERT INTO Weather
+                           (Location, DateStamp, MaxTemp, MinTemp, Precipitation)
+                         VALUES
+                           (%s, %s, %s, %s, %s)
+                         ON DUPLICATE KEY UPDATE
+                           MaxTemp       = VALUES(MaxTemp),
+                           MinTemp       = VALUES(MinTemp),
+                           Precipitation = VALUES(Precipitation)	
+                        '''
                 values = (location, date, max_temp, min_temp, precipitation)
                 cursor.execute(query, values)
             except mysql.connector.IntegrityError as e:
